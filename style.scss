@@ -1,0 +1,76 @@
+@import 'variable';
+@import 'mixins';
+@import 'media';
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+button{
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+.btn{
+    display: inline-block;
+    padding: 7px 14px;
+    box-shadow: 0px 0px 4px -2px;
+    @each $key,$var in $color {
+        &-#{$key}{
+            background: $var;
+            @if $key =='dark'{
+                color: white;
+        }
+    }
+    }
+    @each $key,$var in $color {
+        &-outer-#{$key}{
+            border: solid 1px $var;
+            color: $var;
+            &:hover{
+                background: $var;
+                color: white;
+            }
+        }  
+    }
+}
+body{
+    height: 100vh;
+    position: relative;
+    @include position-center(hello);
+}
+@for $i from 1 to 10 {
+    .o-#{$i}{
+        opacity: $i/10;
+    }
+}
+.f-space{
+    @include f-space;
+}
+h1{
+    @include rp-sm{
+        color:red;
+    }
+    @include rp-md{
+        color: aqua;
+    }
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    @for $i from 1 through 12 {
+        .col-sm-#{$i}{
+            @include rp-sm{
+                width: (100%/12)*$i;
+            }
+        }
+    }
+    @for $i from 1 through 12 {
+        .col-md-#{$i}{
+            @include rp-md{
+                width: (100%/12)*$i;
+            }
+        }
+        
+    }
+}
